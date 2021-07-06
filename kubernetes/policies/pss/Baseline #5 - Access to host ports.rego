@@ -6,7 +6,7 @@ default failHostPorts = false
 
 __rego_metadata__ := {
 	"id": "KSV024",
-	"title": "Access to host ports",
+	"title": "Host ports must be disallowed",
 	"version": "v1.0.0",
 	"severity": "HIGH",
 	"type": "Kubernetes Security Check",
@@ -49,7 +49,7 @@ failHostPorts {
 deny[res] {
 	failHostPorts
 
-	msg := sprintf("container %s of %s %s in %s namespace should not set host ports, ports[*].hostPort%s", [getContainersWithDisallowedHostPorts[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace, host_ports_msg])
+	msg := sprintf("Container '%s' of '%s' '%s' in '%s' namespace should not set host ports, ports[*].hostPort%s", [getContainersWithDisallowedHostPorts[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace, host_ports_msg])
 
 	res := {
 		"msg": msg,

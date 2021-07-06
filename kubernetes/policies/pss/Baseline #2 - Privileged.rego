@@ -6,7 +6,7 @@ default failPrivileged = false
 
 __rego_metadata__ := {
 	"id": "KSV017",
-	"title": "Privileged",
+	"title": "Privileged Pods disable most security mechanisms and must be disallowed",
 	"version": "v1.0.0",
 	"severity": "HIGH",
 	"type": "Kubernetes Security Check",
@@ -37,7 +37,7 @@ failPrivileged {
 deny[res] {
 	failPrivileged
 
-	msg := kubernetes.format(sprintf("container %s of %s %s in %s namespace should set securityContext.privileged to false", [getPrivilegedContainers[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace]))
+	msg := kubernetes.format(sprintf("Container '%s' of '%s' '%s' in '%s' namespace should set securityContext.privileged to false", [getPrivilegedContainers[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace]))
 
 	res := {
 		"msg": msg,

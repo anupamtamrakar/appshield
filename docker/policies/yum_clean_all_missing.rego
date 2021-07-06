@@ -8,8 +8,8 @@ __rego_metadata__ := {
 	"version": "v1.0.0",
 	"severity": "HIGH",
 	"type": "Dockerfile Security Check",
-	"description": "Need to use 'yum clean all' after using a 'yum install' command to clean package cached data and reduce image size",
-	"recommended_actions": "Add 'yum clean all' to Dockerfile",
+	"description": "Need to use 'yum clean all' after using a 'yum install' command to clean package cached data and reduce image size.",
+	"recommended_actions": "Add 'yum clean all' to Dockerfile after 'yum install' command",
 	"url": "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run",
 }
 

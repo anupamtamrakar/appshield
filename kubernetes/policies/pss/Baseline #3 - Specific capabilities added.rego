@@ -6,7 +6,7 @@ default failAdditionalCaps = false
 
 __rego_metadata__ := {
 	"id": "KSV022",
-	"title": "Specific capabilities added",
+	"title": "Adding capabilities beyond the default set must be disallowed",
 	"version": "v1.0.0",
 	"severity": "MEDIUM",
 	"type": "Kubernetes Security Check",
@@ -49,7 +49,7 @@ failAdditionalCaps {
 deny[res] {
 	failAdditionalCaps
 
-	msg := sprintf("container %s of %s %s in %s namespace should not set securityContext.capabilities.add%s", [getContainersWithDisallowedCaps[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace, caps_msg])
+	msg := sprintf("Container '%s' of '%s' '%s' in '%s' namespace should not set securityContext.capabilities.add%s", [getContainersWithDisallowedCaps[_], lower(kubernetes.kind), kubernetes.name, kubernetes.namespace, caps_msg])
 
 	res := {
 		"msg": msg,
